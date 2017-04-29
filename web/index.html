@@ -77,116 +77,108 @@
 
         </div>
         <!-- /.row -->
-        <!--NEWS-->
-        <div class="row">
-            <div class="col-lg-12 ">
-                <h3 class="page-header">News</h3>
-            </div>
-            <div class="col-md-12">
-                <p class="bg-warning">
-                <br><br><br><br><br><br><br><br><br>
-                <br><br><br><br><br><br><br><br><br>
-                <br></p>
-            </div>
-        </div>
-        <!--NEWS End-->
-          <!-- Portfolio Grid Section -->
-    <section id="portfolio" class="bg-light-gray">
+        <!-- NEWS -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">NEWS</h2>
-                    <h3 class="section-subheading text-muted">Explore Current Fires</h3>
+                    <h1 class="page-header">NEWS</h1>
+                    <h3 class="section-subheading text-muted">Explore Recent Fires</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
+                    <a href="soledad_fire.html">
                         <img src="css/img/MAREKFIRE.jpg" class="img-responsive" alt="">
                     </a>
                     <div class="portfolio-caption">
                         <h4>MAREK FIRE</h4>
-                        <p class="text-muted">LOS ANGELES, USA</p>
+                        <p class="text-muted">NOV 14 2016</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/startup-framework.png" class="img-responsive" alt="">
+                    <a href="soledad_fire.html">
+                        <img src="css/img/SOLEDADFIRE.jpg" class="img-responsive" alt="">
                     </a>
                     <div class="portfolio-caption">
-                        <h4>Startup Framework</h4>
-                        <p class="text-muted">Website Design</p>
+                        <h4>SOLEDAD FIRE</h4>
+                        <p class="text-muted">APR 24 2017</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/treehouse.png" class="img-responsive" alt="">
+                    <a href="soledad_fire.html">
+                        <img src="css/img/LOMAFIRE.jpg" class="img-responsive" alt="">
                     </a>
                     <div class="portfolio-caption">
-                        <h4>Treehouse</h4>
-                        <p class="text-muted">Website Design</p>
+                        <h4>LOMA FIRE</h4>
+                        <p class="text-muted">SEP 26 2016</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/golden.png" class="img-responsive" alt="">
+                    <a href="soledad_fire.html">
+                        <img src="css/img/JACOBSONFIRE.jpg" class="img-responsive" alt="">
                     </a>
                     <div class="portfolio-caption">
-                        <h4>Golden</h4>
-                        <p class="text-muted">Website Design</p>
+                        <h4>JACOBSON FIRE</h4>
+                        <p class="text-muted">OCT 22 2016</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/escape.png" class="img-responsive" alt="">
+                    <a href="soledad_fire.html">
+                        <img src="css/img/EMERALDFIRE.jpg" class="img-responsive" alt="">
                     </a>
                     <div class="portfolio-caption">
-                        <h4>Escape</h4>
-                        <p class="text-muted">Website Design</p>
+                        <h4>EMERALD FIRE</h4>
+                        <p class="text-muted">OCT 14 2016</p>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/dreams.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Dreams</h4>
-                        <p class="text-muted">Website Design</p>
-                    </div>
+
+
+            </div>
+        </div>
+ <!-- GEOLOCATION -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                <h1 class="page-header">What's Around You?</h1>
+                <h3 class="section-subheading text-muted">Click the button to get your coordinates.</h3>
+                    <button class="btn-success btn" onclick="getLocation()">Get Your Geolocation</button>
+                    <p id="demo"></p>
+                    <script>
+                    var x = document.getElementById("demo");
+                    function getLocation() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(showPosition);
+                        } else { 
+                            x.innerHTML = "Geolocation is not supported by this browser.";
+                        }
+                    }
+                    function showPosition(position) {
+                        x.innerHTML = "Latitude: " + position.coords.latitude + 
+                        "<br>Longitude: " + position.coords.longitude;
+                    }
+                    </script>
+                    <h3 class="section-subheading text-muted">or<br>
+                    Enter Your Geolocation Info</h3>
+                </div>
+                <div class="col-lg-12 text-center">
+
+
+                    <form class="form-inline">
+                      <div class="form-group">
+                        <label for="exampleInputName2">Latitude</label>
+                        <input type="text" class="form-control" id="exampleInputName2" placeholder="">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail2">Longitude</label>
+                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="">
+                      </div>
+                      <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+
                 </div>
             </div>
         </div>
-    </section>
+
 
 
         <hr>

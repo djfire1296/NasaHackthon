@@ -25,59 +25,59 @@ def pixelstolatlon(px, py, zoom):
     lon = (mx / ORIGIN_SHIFT) * 180.0
     return lat, lon
 
-############################################
+    ############################################
 
-# a neighbourhood in Lajeado, Brazil:
+    # a neighbourhood in Lajeado, Brazil:
 
-# upperleft =  '-29.44,-52.0'  
-# lowerright = '-29.45,-51.98'
-upperleft = '36.67,-122.24'
-lowerright = '36.29,-121.60'
+    # upperleft =  '-29.44,-52.0'  
+    # lowerright = '-29.45,-51.98'
 
-zoom = 12   # be careful not to get too many images!
+    ############################################
 
-############################################
+def get_map(upperleft='36.67,-122.24', lowerright='36.29,-121.60', zoom = 12):
+    ullat, ullon = map(float, upperleft.split(','))
+    lrlat, lrlon = map(float, lowerright.split(','))
 
-ullat, ullon = map(float, upperleft.split(','))
-lrlat, lrlon = map(float, lowerright.split(','))
+    # Set some important parameters
+    scale = 1
+    maxsize = 640
 
-# Set some important parameters
-scale = 1
-maxsize = 640
+    # convert all these coordinates to pixels
+    ulx, uly = latlontopixels(ullat, ullon, zoom)
+    lrx, lry = latlontopixels(lrlat, lrlon, zoom)
 
-# convert all these coordinates to pixels
-ulx, uly = latlontopixels(ullat, ullon, zoom)
-lrx, lry = latlontopixels(lrlat, lrlon, zoom)
+    # calculate total pixel dimensions of final image
+    dx, dy = lrx - ulx, uly - lry
 
-# calculate total pixel dimensions of final image
-dx, dy = lrx - ulx, uly - lry
+    # calculate rows and columns
+    cols, rows = int(ceil(dx/maxsize)), int(ceil(dy/maxsize))
 
-# calculate rows and columns
-cols, rows = int(ceil(dx/maxsize)), int(ceil(dy/maxsize))
-
-# calculate pixel dimensions of each small image
-bottom = 120
-largura = int(ceil(dx/cols))
-altura = int(ceil(dy/rows))
-alturaplus = altura + bottom
+    # calculate pixel dimensions of each small image
+    bottom = 120
+    largura = int(ceil(dx/cols))
+    altura = int(ceil(dy/rows))
+    alturaplus = altura + bottom
 
 
-final = Image.new("RGB", (int(dx), int(dy)))
-for x in range(cols):
-    for y in range(rows):
-        dxn = largura * (0.5 + x)
-        dyn = altura * (0.5 + y)
-        latn, lonn = pixelstolatlon(ulx + dxn, uly - dyn - bottom/2, zoom)
-        position = ','.join((str(latn), str(lonn)))
-        print x, y, position, largura, alturaplus
-        urlparams = urllib.urlencode({'center': position,
-                                      'zoom': str(zoom),
-                                      'size': '%dx%d' % (largura, alturaplus),
-                                      'maptype': 'satellite',
-                                      'sensor': 'false',
-                                      'scale': scale})
-        url = 'http://maps.google.com/maps/api/staticmap?' + urlparams
-        f=urllib.urlopen(url)
-        im=Image.open(StringIO.StringIO(f.read()))
-        final.paste(im, (int(x*largura), int(y*altura)))
-final.show()
+    final = Image.new("RGB", (int(dx), int(dy)))
+    for x in range(cols):
+        for y in range(rows):
+            dxn = largura * (0.5 + x)
+            dyn = altura * (0.5 + y)
+            latn, lonn = pixelstolatlon(ulx + dxn, uly - dyn - bottom/2, zoom)
+            position = ','.join((str(latn), str(lonn)))
+            print x, y, position, largura, alturaplus
+            urlparams = urllib.urlencode({'center': position,
+                                          'zoom': str(zoom),
+                                          'size': '%dx%d' % (largura, alturaplus),
+                                          'maptype': 'satellite',
+                                          'sensor': 'false',
+                                          'scale': scale})
+            url = 'http://maps.google.com/maps/api/staticmap?' + urlparams
+            f=urllib.urlopen(url)
+            im=Image.open(StringIO.StringIO(f.read()))
+            final.paste(im, (int(x*largura), int(y*altura)))
+    final.show()
+
+if __name__ == '__main__':
+    get_map()

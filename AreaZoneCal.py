@@ -24,7 +24,7 @@ class GetAreaLatLon:
         self.dist_up_y = dist_up_y
         self.dist_down_y = dist_down_y
         
-    def vincentyDis(self, direction):
+    def vincentyDis(self):
         origin = geopy.Point(self.lat, self.lon)
         
         # left 

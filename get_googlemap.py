@@ -1,6 +1,7 @@
 from PIL import Image
 import urllib, StringIO
 from math import log, exp, tan, atan, pi, ceil
+from googlemap_api_key import *
 
 EARTH_RADIUS = 6378137
 EQUATOR_CIRCUMFERENCE = 2 * pi * EARTH_RADIUS
@@ -59,7 +60,9 @@ def get_map(upperleft='36.67,-122.24', lowerright='36.29,-121.60', zoom = 12):
     alturaplus = altura + bottom
 
 
-    final = Image.new("RGB", (int(dx), int(dy)))
+    satellite_final = Image.new("RGB", (int(dx), int(dy)))
+    road_final = Image.new("RGB", (int(dx), int(dy)))
+
     for x in range(cols):
         for y in range(rows):
             dxn = largura * (0.5 + x)
@@ -67,17 +70,56 @@ def get_map(upperleft='36.67,-122.24', lowerright='36.29,-121.60', zoom = 12):
             latn, lonn = pixelstolatlon(ulx + dxn, uly - dyn - bottom/2, zoom)
             position = ','.join((str(latn), str(lonn)))
             print x, y, position, largura, alturaplus
-            urlparams = urllib.urlencode({'center': position,
-                                          'zoom': str(zoom),
-                                          'size': '%dx%d' % (largura, alturaplus),
-                                          'maptype': 'satellite',
-                                          'sensor': 'false',
-                                          'scale': scale})
-            url = 'http://maps.google.com/maps/api/staticmap?' + urlparams
-            f=urllib.urlopen(url)
-            im=Image.open(StringIO.StringIO(f.read()))
-            final.paste(im, (int(x*largura), int(y*altura)))
-    final.show()
+            surlparams = urllib.urlencode({'center': position,
+                                           'zoom': str(zoom),
+                                           'size': '%dx%d' % (largura, alturaplus),
+                                           'maptype': 'satellite',
+                                           'sensor': 'false',
+                                           'scale': str(scale),
+                                           'key': api_key})
+
+            surl = 'http://maps.google.com/maps/api/staticmap?' + surlparams
+            # rurl = 'http://maps.google.com/maps/api/staticmap?' + rurlparams
+
+            rurl = 'https://maps.googleapis.com/maps/api/staticmap?key={}&\
+center={}&zoom={}&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0xf5f5f5&\
+style=element:labels%7Cvisibility:off&style=element:labels.icon%7Cvisibility:off&\
+style=element:labels.text.fill%7Ccolor:0x616161&style=element:labels.text.stroke%7Ccolor:0xf5f5f5&\
+style=feature:administrative%7Celement:geometry%7Cvisibility:off&style=feature:administrative.land_parcel%7Cvisibility:off&\
+style=feature:administrative.land_parcel%7Celement:labels.text.fill%7Ccolor:0xbdbdbd&\
+style=feature:administrative.neighborhood%7Cvisibility:off&\
+style=feature:landscape.man_made%7Celement:geometry.fill%7Cvisibility:simplified&\
+style=feature:poi%7Cvisibility:off&style=feature:poi%7Celement:geometry%7Ccolor:0xeeeeee&\
+style=feature:poi%7Celement:labels.text.fill%7Ccolor:0x757575&\
+style=feature:poi.park%7Celement:geometry%7Ccolor:0xe5e5e5&\
+style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&\
+style=feature:road%7Celement:geometry%7Ccolor:0xffffff&\
+style=feature:road%7Celement:labels.icon%7Cvisibility:off&\
+style=feature:road.arterial%7Celement:labels.text.fill%7Ccolor:0x757575&\
+style=feature:road.highway%7Celement:geometry%7Ccolor:0xdadada&\
+style=feature:road.highway%7Celement:labels.text.fill%7Ccolor:0x616161&\
+style=feature:road.local%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&\
+style=feature:transit%7Cvisibility:off&style=feature:transit.line%7Celement:geometry%7Ccolor:0xe5e5e5&\
+style=feature:transit.station%7Celement:geometry%7Ccolor:0xeeeeee&\
+style=feature:water%7Celement:geometry%7Ccolor:0xc9c9c9&\
+style=feature:water%7Celement:geometry.fill%7Ccolor:0x000000&\
+style=feature:water%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&\
+size={}&scale={}'.format(api_key, position, str(zoom), '%dx%d' % (largura, alturaplus), str(scale))
+
+            if x == 0 and y == 0:
+                print rurl
+
+            s = urllib.urlopen(surl)
+            sim = Image.open(StringIO.StringIO(s.read()))
+
+            r = urllib.urlopen(rurl)
+            rim = Image.open(StringIO.StringIO(r.read()))
+
+            satellite_final.paste(sim, (int(x*largura), int(y*altura)))
+            road_final.paste(rim, (int(x*largura), int(y*altura)))
+    satellite_final.show()
+    road_final.show()
 
 if __name__ == '__main__':
+    print api_key
     get_map()

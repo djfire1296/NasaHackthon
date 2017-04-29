@@ -39,13 +39,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">LifeSaver</a>
+                <a class="navbar-brand" href="index.html" id="logo">LifeSaver</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="report_waiting.html">Report</a>
+                        <a href="report_waiting.html" id="navReport">Report</a>
                     </li>
                 </ul>
             </div>
@@ -141,8 +141,8 @@
                 <div class="col-lg-12 text-center">
                 <h1 class="page-header">What's Around You?</h1>
                 <h3 class="section-subheading text-muted">Click the button to get your coordinates.</h3>
-                    <button class="btn-success btn" onclick="getLocation()">Get Your Geolocation</button>
-                    <p id="demo"></p>
+                    <button class="btn-success btn" id="getGeo" onclick="getLocation()">Get Your Geolocation</button>
+                    <p id="geoResult"></p>
                     <script>
                     var x = document.getElementById("demo");
                     function getLocation() {
@@ -166,13 +166,13 @@
                     <form class="form-inline">
                       <div class="form-group">
                         <label for="exampleInputName2">Latitude</label>
-                        <input type="text" class="form-control" id="exampleInputName2" placeholder="">
+                        <input type="text" class="form-control" id="latitude" placeholder="">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputEmail2">Longitude</label>
-                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="">
+                        <input type="email" class="form-control" id="longitude" placeholder="">
                       </div>
-                      <button type="submit" class="btn btn-success">Submit</button>
+                      <button type="submit" class="btn btn-success" id="submitGeo">Submit</button>
                     </form>
 
                 </div>

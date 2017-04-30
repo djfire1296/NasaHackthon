@@ -106,14 +106,12 @@ style=feature:water%7Celement:geometry.fill%7Ccolor:0x000000&\
 style=feature:water%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&\
 size={}&scale={}'.format(api_key, position, str(zoom), '%dx%d' % (largura, alturaplus), str(scale))
 
-            if x == 0 and y == 0:
-                print rurl
-
             s = urllib.urlopen(surl)
             sim = Image.open(StringIO.StringIO(s.read()))
 
             r = urllib.urlopen(rurl)
             rim = Image.open(StringIO.StringIO(r.read()))
+            rim.save('summarize_waiting.jpg')
 
             satellite_final.paste(sim, (int(x*largura), int(y*altura)))
             road_final.paste(rim, (int(x*largura), int(y*altura)))

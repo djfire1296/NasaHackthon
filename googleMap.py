@@ -13,7 +13,7 @@ import matplotlib as plt
 
 
 
-url = "http://maps.googleapis.com/maps/api/staticmap?center=-30.027489,-51.229248&size=800x800&zoom=14&sensor=false"
+url = "http://maps.googleapis.com/maps/api/staticmap?center=36.45994,-121.89938&size=800x800&zoom=14&sensor=false"
 buffer = StringIO(urllib.urlopen(url).read())
 imageTest = Image.open(buffer)
 

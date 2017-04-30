@@ -2,9 +2,10 @@
 
 import reverse_geocoder as rg
 
-coordinates = (36.45994,-121.89938)
+def find_neareastCity(lat, lon):
 
-results = rg.search(coordinates, mode=1) # default mode = 2
+	results = rg.search((lat, lon), mode=2) # default mode = 2
+	print results
 
-print results[0]['admin2']
+	return results[0]
 

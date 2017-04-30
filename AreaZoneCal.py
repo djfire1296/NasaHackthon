@@ -8,11 +8,15 @@ from geopy.distance import VincentyDistance
 #一定要裝 geopy
 
 # given: lat1, lon1, b = bearing in degrees, d = distance in kilometers
-# bearing 是方位, 這是0~360, 所以我們要找的在 0, 90, 180, 270, 360
+# bearing 是方位, 這是0~360, 所以我們要找的在 0 up, 90, 180, 270, 360
 
-class GetAreaLatLon:
-
-    def __init__(self, lat, lon, dist_left_x, dist_right_x, dist_down_y, dist_up_y):
+class GetAreaLatLon():
+    # lat: latitude, lon: longtitude, 
+    # dist_left_x: left distance from the begin point, default = 20
+    # dist_right_x: right distance from the begin point, default = 20
+    # dist_up_y: up distance from the begin point, default = 10
+    # dist_down_y: down distance from the begin point, default = 10
+    def __init__(self, lat, lon, dist_left_x=20, dist_right_x=20, dist_down_y=10, dist_up_y=10):
         #要輸入 lat = 緯度, lon = 經度, dist_x = 水平距離, dist_y = 垂直距離
         if dist_left_x <= 0 or dist_right_x <= 0 or dist_up_y < 0 or dist_down_y < 0 :
             raise ValueError(' Distance should be positive!')
@@ -27,19 +31,19 @@ class GetAreaLatLon:
     def vincentyDis(self):
         origin = geopy.Point(self.lat, self.lon)
         
-        # left 
+        # left: 270
         left_destination = VincentyDistance(kilometers=self.dist_left_x) \
                                     .destination(origin, 270)
                                     
-        # up
+        # up: 0
         up_destination = VincentyDistance(kilometers=self.dist_up_y) \
                                     .destination(origin, 0)
         
-        # right
+        # right: 90
         right_destination = VincentyDistance(kilometers=self.dist_right_x) \
                                     .destination(origin, 90)  
                                     
-        # down
+        # down: 180
         down_destination = VincentyDistance(kilometers=self.dist_down_y) \
                                     .destination(origin, 180)
                                     
